@@ -1,4 +1,4 @@
-require './base_test'
+require_relative 'base_test'
 
 class CliTest < BaseTest
   def test_new_basic_project

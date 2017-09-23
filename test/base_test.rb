@@ -2,11 +2,12 @@ require 'tmpdir'
 require 'timeout'
 require 'open3'
 require 'faraday'
+require 'pathname'
 require 'minitest/autorun'
 
 class BaseTest < Minitest::Test
-  DEBUG = true
-  STUBBORN_EXECUTABLE = File.expand_path('../bin/stubborn', Dir.pwd)
+  DEBUG = false
+  STUBBORN_EXECUTABLE = File.expand_path('bin/stubborn', Dir.pwd)
   
   def current_command
     @current_command
