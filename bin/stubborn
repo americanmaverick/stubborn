@@ -4,18 +4,8 @@ require 'fileutils'
 require 'slim'
 require 'pathname'
 
-command = ARGV[0]
 STUBBORN_ROOT = File.expand_path('../..', __FILE__)
+$LOAD_PATH.unshift(File.expand_path('lib', STUBBORN_ROOT))
+require 'stubborn'
 
-if command == 'new'
-  project_template = File.expand_path('templates/project', STUBBORN_ROOT)
-  FileUtils.cp_r(project_template, ARGV[1])
-elsif command == 'build'
-  locals = {}
-  result = Slim::Template.new("index.slim").render(nil, locals)
-  Pathname('site/index.html').write(result)
-elsif command == 'server'
-  Kernel.exec('ruby -run -e httpd ./site -p 9393')
-else
-  print "No such command: '#{command}'\n"
-end
+Stubborn.run_cli(ARGV)
