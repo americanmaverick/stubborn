@@ -32,7 +32,15 @@ SLIM
       Dir.chdir('stubborn-homepage')
       stubborn(:build)
       index_html_contents = Pathname('./site/index.html').read
-      assert_equal(index_html_contents, '<html><head><title>Stubborn</title><link href="style.css" rel="stylesheet" type="text/css" /></head><body></body></html>')
+      assert_equal(<<-HTML.gsub(/\n\Z/, ''), index_html_contents)
+<html>
+  <head>
+    <title>Stubborn</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+</html>
+HTML
     end
   end
   
@@ -46,7 +54,15 @@ SLIM
         get('/')
       end
 
-      assert_equal(res.body, '<html><head><title>Stubborn</title><link href="style.css" rel="stylesheet" type="text/css" /></head><body></body></html>')
+      assert_equal(<<-HTML.gsub(/\n\Z/, ''), res.body)
+<html>
+  <head>
+    <title>Stubborn</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+</html>
+      HTML
     end
   end
 end

@@ -32,7 +32,7 @@ module Stubborn
     end
 
     locals = {}
-    result = Slim::Template.new("index.slim").render(self, locals)
+    result = Slim::Template.new("index.slim", pretty: true).render(self, locals)
     Pathname('site/index.html').write(result)
   end
   
