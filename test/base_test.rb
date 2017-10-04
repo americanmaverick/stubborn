@@ -5,6 +5,9 @@ require 'faraday'
 require 'pathname'
 require 'minitest/autorun'
 
+$LOAD_PATH.unshift('./lib')
+require 'stubborn'
+
 class BaseTest < Minitest::Test
   DEBUG = false
   STUBBORN_EXECUTABLE = File.expand_path('bin/stubborn', Dir.pwd)
@@ -53,7 +56,7 @@ class BaseTest < Minitest::Test
     until res do
       begin
         res = Faraday.get("http://localhost:9393#{path}")
-      rescue => e
+      rescue
         sleep 1
       end
     end

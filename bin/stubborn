@@ -1,11 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'fileutils'
-require 'slim'
-require 'pathname'
-
-STUBBORN_ROOT = File.expand_path('../..', __FILE__)
-$LOAD_PATH.unshift(File.expand_path('lib', STUBBORN_ROOT))
+$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'stubborn'
 
 Stubborn.run_cli(ARGV)

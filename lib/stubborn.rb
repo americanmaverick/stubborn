@@ -1,4 +1,9 @@
 require "stubborn/version"
+require 'fileutils'
+require 'slim'
+require 'pathname'
+
+STUBBORN_ROOT = File.expand_path('../..', __FILE__)
 
 module Stubborn
   def self.run_cli(argv)
@@ -21,12 +26,19 @@ module Stubborn
   end
   
   def self.build_project
+    begin
+      require './stubborn_helper'
+    rescue LoadError
+    end
+
     locals = {}
-    result = Slim::Template.new("index.slim").render(nil, locals)
+    result = Slim::Template.new("index.slim").render(self, locals)
     Pathname('site/index.html').write(result)
   end
   
   def self.run_server
-    Kernel.exec('ruby -run -e httpd ./site -p 9393')
+    doc_root = File.expand_path('site', Dir.pwd)
+    p "ruby -run -e httpd #{doc_root} -p 9393"
+    Kernel.exec("ruby -run -e httpd #{doc_root} -p 9393")
   end
 end
