@@ -22,9 +22,8 @@ html
       INDEX
       
       Stubborn.build_project
-      index_html_contents = Pathname('site/index.html').read
+      index_html_contents = Pathname('docs/index.html').read
       assert_match(/Written by Helper/, index_html_contents)
     end
   end
-
 end

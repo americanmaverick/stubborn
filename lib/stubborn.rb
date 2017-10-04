@@ -8,7 +8,7 @@ STUBBORN_ROOT = File.expand_path('../..', __FILE__)
 module Stubborn
   def self.run_cli(argv)
     command = argv.shift
-  
+    
     if command == 'new'
       new_project(argv.shift)
     elsif command == 'build'
@@ -33,11 +33,11 @@ module Stubborn
 
     locals = {}
     result = Slim::Template.new("index.slim", pretty: true).render(self, locals)
-    Pathname('site/index.html').write(result)
+    Pathname('docs/index.html').write(result)
   end
   
   def self.run_server
-    doc_root = File.expand_path('site', Dir.pwd)
+    doc_root = File.expand_path('docs', Dir.pwd)
     Kernel.exec("ruby -run -e httpd #{doc_root} -p 9393")
   end
 end

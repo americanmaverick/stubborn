@@ -9,9 +9,9 @@ class CliTest < BaseTest
       
       assert_equal(directory_contents, [
         './stubborn-homepage',
-        './stubborn-homepage/index.slim',
-        './stubborn-homepage/site',
-        './stubborn-homepage/site/style.css'
+        './stubborn-homepage/docs',
+        './stubborn-homepage/docs/style.css',
+        './stubborn-homepage/index.slim'
       ])
       
       index_template_contents = Pathname('./stubborn-homepage/index.slim').read
@@ -31,7 +31,7 @@ SLIM
       stubborn(:new, 'stubborn-homepage')
       Dir.chdir('stubborn-homepage')
       stubborn(:build)
-      index_html_contents = Pathname('./site/index.html').read
+      index_html_contents = Pathname('./docs/index.html').read
       assert_equal(<<-HTML.gsub(/\n\Z/, ''), index_html_contents)
 <html>
   <head>
