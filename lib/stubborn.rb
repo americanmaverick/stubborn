@@ -38,7 +38,6 @@ module Stubborn
   
   def self.run_server
     doc_root = File.expand_path('site', Dir.pwd)
-    p "ruby -run -e httpd #{doc_root} -p 9393"
     Kernel.exec("ruby -run -e httpd #{doc_root} -p 9393")
   end
 end
